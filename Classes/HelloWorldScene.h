@@ -23,10 +23,10 @@ public:
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
     
+    bool tryIsInternetConnection();
     void trySendAnEmail(CCObject* pSender);
     void trySendATweet(CCObject* pSender);
     void tryPostOnFB(CCObject* pSender);
-    void tryIsInternetConnection();
     void updateMessageLabel(const char *status);
     
     static HelloWorld * get_instance();

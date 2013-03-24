@@ -23,8 +23,6 @@ void InterfaceJNI::postMessageToFB()
 	// Get Status
 	status = jvm->GetEnv((void **) &env, JNI_VERSION_1_6);
 
-
-
 	if(status < 0)
 	{
 		//LOGE("callback_handler: failed to get JNI environment, " // "assuming native thread");
@@ -158,4 +156,53 @@ void InterfaceJNI::postMessageEMail()
 		jvm->DetachCurrentThread();
 
 	return;
+}
+bool InterfaceJNI::isInternetConnected()
+{
+	JavaVM* jvm = JniHelper::getJavaVM();
+	int status;
+	JNIEnv *env;
+	jmethodID mid;
+
+	bool isAttached = false;
+
+	CCLog("Static isInternetConnected");
+
+	// Get Status
+	status = jvm->GetEnv((void **) &env, JNI_VERSION_1_6);
+
+	if(status < 0)
+	{
+		//LOGE("callback_handler: failed to get JNI environment, " // "assuming native thread");
+		status = jvm->AttachCurrentThread(&env, NULL);
+		CCLog("Status 2: %d", status);
+		if(status < 0)
+		{
+			// LOGE("callback_handler: failed to attach " // "current thread");
+			return false;
+		}
+		isAttached = true;
+		CCLog("Status isAttached: %d", isAttached);
+	}
+	//-----------------------------------------------------------
+
+	CCLog("Status: %d", status);
+
+	jclass mClass = env->FindClass("org/example/SocialNetwork/InternetConnection");
+
+	CCLog("jClass Located?");
+
+	mid = env->GetStaticMethodID(mClass, "isInternetConnection", "()V");
+
+	CCLog("mID: %d", mid);
+
+	if (mid!=0)
+		env->CallStaticVoidMethod(mClass, mid);
+			//-----------------------------------------------------------
+	CCLog("Finish");
+	if(isAttached)
+		jvm->DetachCurrentThread();
+
+	// Change for return value
+	return true;
 }
