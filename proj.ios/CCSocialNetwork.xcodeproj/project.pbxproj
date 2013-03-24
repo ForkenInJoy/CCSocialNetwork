@@ -147,6 +147,15 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
+		97F1792C16FF9972004577F2 /* Facebook.mm in Sources */ = {isa = PBXBuildFile; fileRef = 97F1792316FF9972004577F2 /* Facebook.mm */; };
+		97F1792E16FF9972004577F2 /* MailSender.mm in Sources */ = {isa = PBXBuildFile; fileRef = 97F1792716FF9972004577F2 /* MailSender.mm */; };
+		97F1792F16FF9972004577F2 /* ObjCCalls.mm in Sources */ = {isa = PBXBuildFile; fileRef = 97F1792916FF9972004577F2 /* ObjCCalls.mm */; };
+		97F1793016FF9972004577F2 /* TweetSender.mm in Sources */ = {isa = PBXBuildFile; fileRef = 97F1792B16FF9972004577F2 /* TweetSender.mm */; };
+		97F1793216FF9A62004577F2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F1793116FF9A62004577F2 /* Accounts.framework */; };
+		97F1793416FF9A68004577F2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F1793316FF9A68004577F2 /* Social.framework */; };
+		97F1793616FF9A85004577F2 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F1793516FF9A85004577F2 /* MessageUI.framework */; };
+		97F1793916FFA924004577F2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F1793816FFA924004577F2 /* Reachability.m */; };
+		97F1793D16FFAC7A004577F2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F1793C16FFAC7A004577F2 /* SystemConfiguration.framework */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -461,6 +470,21 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
+		97F1792216FF9972004577F2 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
+		97F1792316FF9972004577F2 /* Facebook.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Facebook.mm; sourceTree = "<group>"; };
+		97F1792616FF9972004577F2 /* MailSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailSender.h; sourceTree = "<group>"; };
+		97F1792716FF9972004577F2 /* MailSender.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MailSender.mm; sourceTree = "<group>"; };
+		97F1792816FF9972004577F2 /* ObjCCalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCCalls.h; sourceTree = "<group>"; };
+		97F1792916FF9972004577F2 /* ObjCCalls.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjCCalls.mm; sourceTree = "<group>"; };
+		97F1792A16FF9972004577F2 /* TweetSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetSender.h; sourceTree = "<group>"; };
+		97F1792B16FF9972004577F2 /* TweetSender.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TweetSender.mm; sourceTree = "<group>"; };
+		97F1793116FF9A62004577F2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		97F1793316FF9A68004577F2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		97F1793516FF9A85004577F2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		97F1793716FFA923004577F2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		97F1793816FFA924004577F2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		97F1793A16FFAC56004577F2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		97F1793C16FFAC7A004577F2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -482,6 +506,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97F1793D16FFAC7A004577F2 /* SystemConfiguration.framework in Frameworks */,
+				97F1793616FF9A85004577F2 /* MessageUI.framework in Frameworks */,
+				97F1793416FF9A68004577F2 /* Social.framework in Frameworks */,
+				97F1793216FF9A62004577F2 /* Accounts.framework in Frameworks */,
 				15A3DA6A1682F886002FB0C5 /* libcocos2dx.a in Frameworks */,
 				1ACB3244164770DE00914215 /* libcurl.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -987,6 +1015,7 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				97F1792116FF9972004577F2 /* ObjCCalls */,
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
 				1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */,
@@ -1007,6 +1036,11 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				97F1793C16FFAC7A004577F2 /* SystemConfiguration.framework */,
+				97F1793A16FFAC56004577F2 /* CFNetwork.framework */,
+				97F1793516FF9A85004577F2 /* MessageUI.framework */,
+				97F1793316FF9A68004577F2 /* Social.framework */,
+				97F1793116FF9A62004577F2 /* Accounts.framework */,
 				15A3D87E1682F7B3002FB0C5 /* cocos2dx.xcodeproj */,
 				15A3D8871682F7D5002FB0C5 /* Box2D */,
 				15A3D93A1682F7F9002FB0C5 /* chipmunk */,
@@ -1055,6 +1089,24 @@
 			);
 			name = Resources;
 			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		97F1792116FF9972004577F2 /* ObjCCalls */ = {
+			isa = PBXGroup;
+			children = (
+				97F1792216FF9972004577F2 /* Facebook.h */,
+				97F1792316FF9972004577F2 /* Facebook.mm */,
+				97F1792616FF9972004577F2 /* MailSender.h */,
+				97F1792716FF9972004577F2 /* MailSender.mm */,
+				97F1792816FF9972004577F2 /* ObjCCalls.h */,
+				97F1792916FF9972004577F2 /* ObjCCalls.mm */,
+				97F1792A16FF9972004577F2 /* TweetSender.h */,
+				97F1792B16FF9972004577F2 /* TweetSender.mm */,
+				97F1793716FFA923004577F2 /* Reachability.h */,
+				97F1793816FFA924004577F2 /* Reachability.m */,
+			);
+			name = ObjCCalls;
+			path = ../Classes/ObjCCalls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1277,6 +1329,11 @@
 				1AC3624916D4A1E8000847F2 /* AppController.mm in Sources */,
 				1AC3624B16D4A1E8000847F2 /* main.m in Sources */,
 				1AFCDA8216D4A25900906EA6 /* RootViewController.mm in Sources */,
+				97F1792C16FF9972004577F2 /* Facebook.mm in Sources */,
+				97F1792E16FF9972004577F2 /* MailSender.mm in Sources */,
+				97F1792F16FF9972004577F2 /* ObjCCalls.mm in Sources */,
+				97F1793016FF9972004577F2 /* TweetSender.mm in Sources */,
+				97F1793916FFA924004577F2 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

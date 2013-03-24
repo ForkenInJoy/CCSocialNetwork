@@ -25,8 +25,8 @@ public:
     
     void trySendAnEmail(CCObject* pSender);
     void trySendATweet(CCObject* pSender);
-    void tweetCallback(int statusCode);
     void tryPostOnFB(CCObject* pSender);
+    void tryIsInternetConnection();
     void updateMessageLabel(const char *status);
     
     static HelloWorld * get_instance();

@@ -120,6 +120,8 @@ bool HelloWorld::init()
 	mainMenu->setPosition(ccp(size.width/2, size.height/2));
     
     this->addChild(mainMenu, 1);
+    
+    this->tryIsInternetConnection();
 
     return true;
 }
@@ -142,37 +144,32 @@ void HelloWorld::trySendATweet(CCObject* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	InterfaceJNI::postMessageToTweet();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	ObjCCalls::trySendATweet();
+	ObjCCalls::trySendATweet(sLabel->getString());
 #endif
-}
-
-void HelloWorld::tweetCallback(int statusCode)
-{
-    switch (statusCode) {
-        case -1:
-            updateMessageLabel("Oops. Something went wrong.");
-            break;
-        case 0:
-            updateMessageLabel("Tweet cancelled by the user.");
-            break;
-        case 1:
-            updateMessageLabel("Tweet sent.");
-            break;
-        default:
-            updateMessageLabel("Something wrong with the status code?");
-            break;
-    }
 }
 
 void HelloWorld::tryPostOnFB(CCObject* pSender){
     CCLog("HelloWorld: try to post on Facebook");
-    int score = atoi (sLabel->getString());
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     InterfaceJNI::postMessageToFB();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    ObjCCalls::tryPostOnFB(score);
+    ObjCCalls::tryPostOnFB(sLabel->getString());
 #endif
 
+}
+
+void HelloWorld::tryIsInternetConnection(){
+    CCLog("HelloWorld: try to post on Facebook");
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    //InterfaceJNI::postMessageToFB();
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    if(ObjCCalls::tryIsInternetConnection()){
+        CCLog("Internet Connection IS available");
+    }
+    else{
+        CCLog("Internet Connection IS NOT available");
+    }
+#endif
 }
 
 void HelloWorld::updateMessageLabel(const char *text)
