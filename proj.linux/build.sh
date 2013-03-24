@@ -4,7 +4,7 @@ TXTCOLOR_DEFAULT="\033[0;m"
 TXTCOLOR_RED="\033[0;31m"
 TXTCOLOR_GREEN="\033[0;32m"
 
-COCOS2DX20_TRUNK=/home/piperoman/Librerias/cocos2d-2.1rc0-x-2.1.2
+COCOS2DX20_TRUNK=`pwd`/../../..
 OUTPUT_DEBUG=$COCOS2DX20_TRUNK/lib/linux/Debug/
 OUTPUT_RELEASE=$COCOS2DX20_TRUNK/lib/linux/Release/
 

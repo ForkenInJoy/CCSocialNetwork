@@ -22,7 +22,7 @@ iOS Status
 ANDROID Status
 ------------------------
 
-[ ] - Facebook;
+[ ] - Facebook Android SDK 3.0.1 as of March 20, 2013 ;
 [ ] - Twitter; 
 [ ] - E-Mail; 
 [ ] - Check internet connection;

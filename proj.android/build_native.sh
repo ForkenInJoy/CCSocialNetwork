@@ -1,12 +1,5 @@
 APPNAME="CCSocialNetwork"
 
-# MY CONFIG
-NDK_ROOT="/home/piperoman/Librerias/android-ndk-r8c"
-COCOS2DX_ROOT="/home/piperoman/Librerias/cocos2d-2.1rc0-x-2.1.2"
-APP_ROOT="/home/piperoman/Repositorios/git/CCSocialNetwork"
-APP_ANDROID_ROOT="/home/piperoman/Repositorios/git/CCSocialNetwork/proj.android"
-######
-
 # options
 
 buildexternalsfromsource=
@@ -37,10 +30,22 @@ done
 
 # paths
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+## EDIT PATH
+NDK_ROOT="/home/piperoman/Librerias/android-ndk-r8c"
+COCOS2DX_ROOT="/home/piperoman/Librerias/cocos2d-2.1rc0-x-2.1.2"
+
+# ... use paths relative to current directory
+APP_ROOT="$DIR/.."
+APP_ANDROID_ROOT="$DIR"
+##
+
 if [ -z "${NDK_ROOT+aaa}" ];then
 echo "please define NDK_ROOT"
 exit 1
 fi
+
 
 echo "NDK_ROOT = $NDK_ROOT"
 echo "COCOS2DX_ROOT = $COCOS2DX_ROOT"

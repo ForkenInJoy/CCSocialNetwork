@@ -1,4 +1,4 @@
-EXECUTABLE = CCSocialNetwork2
+EXECUTABLE = CCSocialNetwork
 
 INCLUDES = -I.. -I../Classes
 

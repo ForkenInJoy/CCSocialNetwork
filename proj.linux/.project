@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>CCSocialNetwork2</name>
+	<name>CCSocialNetwork</name>
 	<comment></comment>
 	<projects>
 		<project>libBox2D</project>
@@ -40,7 +40,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/CCSocialNetwork2/Debug}</value>
+					<value>${workspace_loc:/CCSocialNetwork/Debug}</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.cleanBuildTarget</key>
