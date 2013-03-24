@@ -23,6 +23,7 @@ public:
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
     
+    bool tryIsInternetConnection();
     void trySendAnEmail(CCObject* pSender);
     void trySendATweet(CCObject* pSender);
     void tweetCallback(int statusCode);

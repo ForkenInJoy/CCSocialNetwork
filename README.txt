@@ -14,18 +14,20 @@ Example using Facebook, twitter, sending e-mails and gree.
 
 iOS Status
 -----------------------
+[ ] - Check internet connection;
 [ ] - Facebook; 
 [ ] - Twitter; 
 [ ] - E-Mail; 
-[  ] - Check internet connection;
+[ ] - Gree;
 
 ANDROID Status
 ------------------------
-
+[ ] - Check internet connection;
 [ ] - Facebook Android SDK 3.0.1 as of March 20, 2013 ;
 [ ] - Twitter; 
 [ ] - E-Mail; 
-[ ] - Check internet connection;
+[ ] - Gree;
+
 
 iOS Instructions
 -----------------------

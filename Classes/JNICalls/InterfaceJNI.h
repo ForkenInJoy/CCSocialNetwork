@@ -9,6 +9,7 @@ public:
 	static void postMessageToFB();
 	static void postMessageEMail();
 	static void postMessageToTweet();
+	static bool isInternetConnected();
     
 protected:
 
