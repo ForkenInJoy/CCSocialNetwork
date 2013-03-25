@@ -39,20 +39,15 @@ HelloWorld* HelloWorld::get_instance()
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
+	// Static reference
     mytry = this;
 
-    //////////////////////////////
-    // 1. super init first
+    // Init
     if ( !CCLayer::init() )
     {
         return false;
     }
-
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
+    // Menu
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
                                         "CloseNormal.png",
                                         "CloseSelected.png",
@@ -60,43 +55,28 @@ bool HelloWorld::init()
                                         menu_selector(HelloWorld::menuCloseCallback) );
     pCloseItem->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20) );
 
-    // create menu, it's an autorelease object
+    // Menu
     CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
     pMenu->setPosition( CCPointZero );
     this->addChild(pMenu, 1);
 
-    /////////////////////////////
-    // 3. add your codes below...
+    // Hello World
+    InterfaceJNI::helloWorld();
 
-    // add a label shows "Hello World"
-    // create and initialize a label
-    CCLabelTTF* pLabel = CCLabelTTF::create("Get Social", "Thonburi", 34);
-
-    // ask director the window size
+    // Welcome
+    CCLabelTTF* pLabel = CCLabelTTF::create("CCSocialNetwork", "Thonburi", 34);
     CCSize size = CCDirector::sharedDirector()->getWinSize();
-
-    // position the label on the center of the screen
     pLabel->setPosition( ccp(size.width / 2, size.height - 20) );
-
-    // add the label as a child to this layer
     this->addChild(pLabel, 1);
 
-    // create and initialize a label
+    // Static Label Score
     CCLabelTTF* scLabel = CCLabelTTF::create("Your Score:", "Thonburi", 34);
-
-    // position the label on the center of the screen
     scLabel->setPosition( ccp(10 + scLabel->getContentSize().width/2, size.height - 20) );
-
-    // add the label as a child to this layer
     this->addChild(scLabel, 1);
 
-    // create and initialize a label
+    // Simulate var Score
     sLabel = CCLabelTTF::create("123", "Thonburi", 34);
-
-    // position the label on the center of the screen
     sLabel->setPosition( ccp(10 + scLabel->getContentSize().width/2, size.height - 60) );
-
-    // add the label as a child to this layer
     this->addChild(sLabel, 1);
 
     // Internet Label
@@ -108,7 +88,9 @@ bool HelloWorld::init()
 	this->addChild(internetValueLabel, 1);
 
 	// Check Internet
-	//bool internet = this->tryIsInternetConnection();
+	CCLog("Go to check Internet connection...");
+	bool internet = this->tryIsInternetConnection();
+	CCLog("Internet connection value: %d", internet);
 
     mLabel = CCLabelTTF::create("", "Thonburi", 20);
     mLabel->setPosition(ccp(size.width/2, 20));
@@ -159,7 +141,7 @@ void HelloWorld::trySendATweet(CCObject* pSender)
 
 bool HelloWorld::tryIsInternetConnection()
 {
-	CCLog("HelloWorld: isInternetConnected");
+	CCLog("HelloWorld: tryIsInternetConnection");
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	return InterfaceJNI::isInternetConnected();
