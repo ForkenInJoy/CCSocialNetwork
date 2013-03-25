@@ -194,12 +194,4 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 #endif
 }
 
-void HelloWorld::testCallFromJava()
-{
-    CCLog("testCallFromJava");
-}
-void HelloWorld::testCallToJava()
-{
-	CCLog("testCallToJava");
-}
 
