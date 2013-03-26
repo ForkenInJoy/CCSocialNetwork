@@ -14,10 +14,10 @@ Example using Facebook, twitter, sending e-mails and gree.
 
 iOS Status
 -----------------------
-[ ] - Check internet connection;
-[ ] - Facebook; 
-[ ] - Twitter; 
-[ ] - E-Mail; 
+[x] - Check internet connection;
+[x] - Facebook; 
+[x] - Twitter; 
+[x] - E-Mail (using in app mailer or external application); 
 [ ] - Gree;
 
 ANDROID Status

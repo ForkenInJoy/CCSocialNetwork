@@ -60,8 +60,10 @@ bool HelloWorld::init()
     pMenu->setPosition( CCPointZero );
     this->addChild(pMenu, 1);
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     // Hello World
     InterfaceJNI::helloWorld();
+#endif
 
     // Welcome
     CCLabelTTF* pLabel = CCLabelTTF::create("CCSocialNetwork", "Thonburi", 34);
@@ -81,16 +83,23 @@ bool HelloWorld::init()
 
     // Internet Label
 	CCLabelTTF* internetLabel = CCLabelTTF::create("Internet Connection:", "Thonburi", 20);
-	CCLabelTTF* internetValueLabel = CCLabelTTF::create("Value", "Thonburi", 20);
+	CCLabelTTF* internetValueLabel = CCLabelTTF::create("", "Thonburi", 20);
 	internetLabel->setPosition( ccp(10 + internetLabel->getContentSize().width/2, size.height - 90) );
 	internetValueLabel->setPosition( ccp(10 + internetValueLabel->getContentSize().width/2, size.height - 120) );
 	this->addChild(internetLabel, 1);
 	this->addChild(internetValueLabel, 1);
 
 	// Check Internet
-	//CCLog("Go to check Internet connection...");
-	//bool internet = this->tryIsInternetConnection();
-	//CCLog("Internet connection value: %d", internet);
+	CCLog("Go to check Internet connection...");
+	bool internet = this->tryIsInternetConnection();
+    if (internet) {
+        internetValueLabel->setString("Connected");
+    }
+    else{
+        internetValueLabel->setString("NOT Connected");
+    }
+	CCLog("Internet connection value: %d", internet);
+
 
     mLabel = CCLabelTTF::create("", "Thonburi", 20);
     mLabel->setPosition(ccp(size.width/2, 20));
@@ -101,18 +110,29 @@ bool HelloWorld::init()
     CCLabelTTF *sendMailButtonLabel = CCLabelTTF::create("Send an email", "Thonburi", 24);
 	CCMenuItemLabel *sendMailButton = CCMenuItemLabel::create(sendMailButtonLabel, this, menu_selector(HelloWorld::trySendAnEmail));
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    CCLabelTTF *sendMailButtonLabelInApp = CCLabelTTF::create("Send an email (in app mailer)", "Thonburi", 24);
+	CCMenuItemLabel *sendMailButtonInApp = CCMenuItemLabel::create(sendMailButtonLabelInApp, this, menu_selector(HelloWorld::trySendAnEmailInApp));
+#endif
+
     CCLabelTTF *sendTweetButtonLabel = CCLabelTTF::create("Send a tweet", "Thonburi", 24);
 	CCMenuItemLabel *sendTweetButton = CCMenuItemLabel::create(sendTweetButtonLabel, this, menu_selector(HelloWorld::trySendATweet));
 
     CCLabelTTF *postOnFBButtonLabel = CCLabelTTF::create("Post on FB", "Thonburi", 24);
 	CCMenuItemLabel *postOnFBButton = CCMenuItemLabel::create(postOnFBButtonLabel, this, menu_selector(HelloWorld::tryPostOnFB));
 
-	CCMenu *mainMenu = CCMenu::create(sendMailButton, sendTweetButton, postOnFBButton, NULL);
+	CCMenu *mainMenu = CCMenu::create(sendMailButton,
+                                      #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+                                      sendMailButtonInApp,
+                                      #endif
+                                      sendTweetButton, postOnFBButton, NULL);
 
 	mainMenu->alignItemsVerticallyWithPadding(size.height * 0.06f);
 	mainMenu->setPosition(ccp(size.width/2, size.height/2));
 
     this->addChild(mainMenu, 1);
+    
+    this->tryIsInternetConnection();
 
     return true;
 }
@@ -120,63 +140,69 @@ bool HelloWorld::init()
 void HelloWorld::trySendAnEmail(CCObject* pSender)
 {
 	CCLog("HelloWorld: try to send an email");
-
+    if (this->tryIsInternetConnection()) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	InterfaceJNI::postMessageEMail();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	ObjCCalls::trySendAnEMail();
+	ObjCCalls::trySendAnEMail(sLabel->getString(),false);
 #endif
+    }
+    else{
+        this->updateMessageLabel("No internet connection to send an email");
+    }
+}
+
+void HelloWorld::trySendAnEmailInApp(CCObject* pSender)
+{
+	CCLog("HelloWorld: try to send an email");
+
+    if (this->tryIsInternetConnection()) {
+        ObjCCalls::trySendAnEMail(sLabel->getString(),true);
+    }
+    else{
+        this->updateMessageLabel("No internet connection to send an email");
+    }
 }
 
 void HelloWorld::trySendATweet(CCObject* pSender)
 {
 	CCLog("HelloWorld: try to send a tweet");
-
+    
+    if (this->tryIsInternetConnection()) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	InterfaceJNI::postMessageToTweet();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	ObjCCalls::trySendATweet();
+	ObjCCalls::trySendATweet(sLabel->getString());
 #endif
-}
-
-bool HelloWorld::tryIsInternetConnection()
-{
-	CCLog("HelloWorld: tryIsInternetConnection");
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	return InterfaceJNI::isInternetConnected();
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	//ObjCCalls::trySendATweet();
-#endif
-}
-
-void HelloWorld::tweetCallback(int statusCode)
-{
-    switch (statusCode) {
-        case -1:
-            updateMessageLabel("Oops. Something went wrong.");
-            break;
-        case 0:
-            updateMessageLabel("Tweet cancelled by the user.");
-            break;
-        case 1:
-            updateMessageLabel("Tweet sent.");
-            break;
-        default:
-            updateMessageLabel("Something wrong with the status code?");
-            break;
+    }
+    else{
+        this->updateMessageLabel("No internet connection to send a Tweet");
     }
 }
 
 void HelloWorld::tryPostOnFB(CCObject* pSender){
     CCLog("HelloWorld: try to post on Facebook");
-    int score = atoi (sLabel->getString());
+    
+    if (this->tryIsInternetConnection()) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     InterfaceJNI::postMessageToFB();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    ObjCCalls::tryPostOnFB(score);
+    ObjCCalls::tryPostOnFB(sLabel->getString());
 #endif
+    }
+    else{
+        this->updateMessageLabel("No internet connection to post on Facebook");
+    }
+}
 
+bool HelloWorld::tryIsInternetConnection()
+{
+	CCLog("HelloWorld: tryIsInternetConnection");
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	return InterfaceJNI::isInternetConnected();
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    return ObjCCalls::tryIsInternetConnection();
+#endif
 }
 
 void HelloWorld::updateMessageLabel(const char *text)
