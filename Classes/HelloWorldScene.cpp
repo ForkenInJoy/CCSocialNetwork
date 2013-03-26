@@ -88,9 +88,9 @@ bool HelloWorld::init()
 	this->addChild(internetValueLabel, 1);
 
 	// Check Internet
-	CCLog("Go to check Internet connection...");
-	bool internet = this->tryIsInternetConnection();
-	CCLog("Internet connection value: %d", internet);
+	//CCLog("Go to check Internet connection...");
+	//bool internet = this->tryIsInternetConnection();
+	//CCLog("Internet connection value: %d", internet);
 
     mLabel = CCLabelTTF::create("", "Thonburi", 20);
     mLabel->setPosition(ccp(size.width/2, 20));
