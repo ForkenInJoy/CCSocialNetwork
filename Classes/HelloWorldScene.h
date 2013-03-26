@@ -21,6 +21,7 @@ public:
     
     bool tryIsInternetConnection();
     void trySendAnEmail(CCObject* pSender);
+    void trySendAnEmailInApp(CCObject* pSender);
     void trySendATweet(CCObject* pSender);
     void tryPostOnFB(CCObject* pSender);
     void updateMessageLabel(const char *status);
