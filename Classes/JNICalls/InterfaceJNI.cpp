@@ -14,7 +14,6 @@ void InterfaceJNI::helloWorld()
 	jmethodID mid;
 	bool isAttached = false;
 
-
 	// Return
 	bool returnValue = false;
 
@@ -228,48 +227,52 @@ bool InterfaceJNI::isInternetConnected()
 	int status;
 	JNIEnv *env;
 	jmethodID mid;
+	jobject jobj;
 
 	bool isAttached = false;
-	// jboolean o bool?
 	bool returnValue = false;
 
-	CCLog("Static isInternetConnected");
+	CCLog("InterfaceJNI isInternetConnected");
 
 	// Get Status
 	status = jvm->GetEnv((void **) &env, JNI_VERSION_1_6);
 
 	if(status < 0)
 	{
-		//LOGE("callback_handler: failed to get JNI environment, " // "assuming native thread");
+		CCLog("isInternetConnected Status < 0 Failed to get JNI Enviroment!!!");
 		status = jvm->AttachCurrentThread(&env, NULL);
 		CCLog("isInternetConnected Status 2: %d", status);
 		if(status < 0)
 		{
-			// LOGE("callback_handler: failed to attach " // "current thread");
+			CCLog("isInternetConnected Status < 0 !!!");
 			return false;
 		}
 		isAttached = true;
 		CCLog("isInternetConnected Status isAttached: %d", isAttached);
 	}
 
-
 	CCLog("isInternetConnected Status: %d", status);
 
-	jclass mClass = env->FindClass("org/example/SocialNetwork/InternetConnection");
+	CCLog("isInternetConnected Finding Class....");
+	jclass mClass = env->FindClass("org/example/SocialNetwork/CCSocialNetwork");
+
 
 	// Get Static bool isInternetConnection()
+	CCLog("isInternetConnected Getting method....");
 	mid = env->GetStaticMethodID(mClass, "isInternetConnection", "()Z");
 	if (mid == 0)
 	{
 		CCLog("isInternetConnected FAIL GET METHOD STATIC");
 		return false;
 	}
+	CCLog("isInternetConnected Calling method....");
 	// Call Static bool isInternetConnection()
-	returnValue = env->CallStaticBooleanMethod(mClass, mid);
-	CCLog("isInternetConnected Done ");
+	jboolean jReturnValue =	env->CallStaticBooleanMethod(mClass,mid);
+	CCLog("Call done ");
+	// Convert value from Java to C++
+	returnValue = (bool)jReturnValue;
+	CCLog("isInternetConnected Done, value is: %d", returnValue);
 
-			//-----------------------------------------------------------
-	CCLog("Finish");
 	if(isAttached)
 		jvm->DetachCurrentThread();
 

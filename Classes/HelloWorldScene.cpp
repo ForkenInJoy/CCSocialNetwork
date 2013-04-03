@@ -92,10 +92,12 @@ bool HelloWorld::init()
 	// Check Internet
 	CCLog("Go to check Internet connection...");
 	bool internet = this->tryIsInternetConnection();
-    if (internet) {
+    if (internet)
+    {
         internetValueLabel->setString("Connected");
     }
-    else{
+    else
+    {
         internetValueLabel->setString("NOT Connected");
     }
 	CCLog("Internet connection value: %d", internet);
@@ -132,7 +134,6 @@ bool HelloWorld::init()
 
     this->addChild(mainMenu, 1);
     
-    this->tryIsInternetConnection();
 
     return true;
 }
@@ -156,10 +157,16 @@ void HelloWorld::trySendAnEmailInApp(CCObject* pSender)
 {
 	CCLog("HelloWorld: try to send an email");
 
-    if (this->tryIsInternetConnection()) {
+    if (this->tryIsInternetConnection())
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    	// Making...
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         ObjCCalls::trySendAnEMail(sLabel->getString(),true);
+#endif
     }
-    else{
+    else
+    {
         this->updateMessageLabel("No internet connection to send an email");
     }
 }
