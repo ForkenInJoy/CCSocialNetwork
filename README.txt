@@ -32,6 +32,7 @@ ANDROID Status
 iOS Instructions
 -----------------------
 
+to compile you must copy CCSocialNetwork inside the "extensions" directory from your cocos2d-x's installation.
 
 ANDROID Instructions
 ------------------------
