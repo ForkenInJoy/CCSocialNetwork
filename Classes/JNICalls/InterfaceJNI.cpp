@@ -148,16 +148,20 @@ void InterfaceJNI::postMessageToTweet()
 
 	CCLog("Status: %d", status);
 
-	jclass mClass = env->FindClass("tutorial/getsocial/meizpipero/GetSocial");
+	// Look for a Class into (java source folder/Java file)
+	jclass mClass = env->FindClass("org/example/SocialNetwork/CCSocialNetwork");
 
 	CCLog("jClass ");
-
-	mid = env->GetStaticMethodID(mClass, "tweet", "()V");
+	// Look for a STATIC METHOD With out send parameters and return VOID into the class
+	mid = env->GetStaticMethodID(mClass, "sendATweet", "()V");
 
 	CCLog("mID: %d", mid);
 
 	if (mid!=0)
+	{
+		// Call the (Static) class got
 		env->CallStaticVoidMethod(mClass, mid);
+	}
 			//-----------------------------------------------------------
 	CCLog("Finish");
 	if(isAttached)
@@ -201,7 +205,7 @@ void InterfaceJNI::postMessageEMail()
 
 	CCLog("Status: %d", status);
 
-	jclass mClass = env->FindClass("tutorial/getsocial/meizpipero/GetSocial");
+	jclass mClass = env->FindClass("org/example/SocialNetwork/CCSocialNetwork");
 
 	CCLog("jClass Located?");
 
@@ -257,7 +261,7 @@ bool InterfaceJNI::isInternetConnected()
 	jclass mClass = env->FindClass("org/example/SocialNetwork/CCSocialNetwork");
 
 
-	// Get Static bool isInternetConnection()
+	// Look for a STATIC METHOD With out send parameters and return BOOLEAN into the class
 	CCLog("isInternetConnected Getting method....");
 	mid = env->GetStaticMethodID(mClass, "isInternetConnection", "()Z");
 	if (mid == 0)

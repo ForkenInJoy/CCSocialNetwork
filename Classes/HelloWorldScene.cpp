@@ -94,11 +94,11 @@ bool HelloWorld::init()
 	bool internet = this->tryIsInternetConnection();
     if (internet)
     {
-        internetValueLabel->setString("Connected");
+        internetValueLabel->setString("Connected YES");
     }
     else
     {
-        internetValueLabel->setString("NOT Connected");
+        internetValueLabel->setString("Connected NO");
     }
 	CCLog("Internet connection value: %d", internet);
 

@@ -27,14 +27,18 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class CCSocialNetwork extends Cocos2dxActivity
 {
-	static boolean m_isInit = false;
 	private static final String TAG = "CCSocialNetwork";
-	static public InternetConnection m_InternetConnection;
+	static Context myAndroidContext;
 	
 	//////////////////////////////////////////////////////////////
 	// 					Lifecicle								//
@@ -42,22 +46,142 @@ public class CCSocialNetwork extends Cocos2dxActivity
     protected void onCreate(Bundle savedInstanceState)
     {
 		super.onCreate(savedInstanceState);	
-		if(!m_isInit)
-		{
-			Log.v(TAG, "Java Initializing CCSocialNetwork");
-			m_isInit = true;
-			m_InternetConnection = new InternetConnection();
-			m_InternetConnection.isInternetConnection(getContext());
-			Log.v(TAG, "Java Initializing CCSocialNetwork finished!");
-		}
+		myAndroidContext = getApplicationContext();
+
 	}
 	//////////////////////////////////////////////////////////////
 	// 					Interface  								//
 	//////////////////////////////////////////////////////////////
     static public boolean isInternetConnection()
     {
-    	return m_InternetConnection.isInternetConnection(getContext());
+    	Log.v("InternetConnection", "isInternetConnection Start");
+    	/*
+    	 // Toast make fail DEMO ! :S
+		Toast toast1 =	Toast.makeText(myAndroidContext,
+										"Checking Internet", Toast.LENGTH_SHORT);
+	        toast1.show();
+		*/
+		ConnectivityManager conMgr =  (ConnectivityManager)myAndroidContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo i = conMgr.getActiveNetworkInfo();
+		
+		if (i == null)
+		{
+			Log.v("InternetConnection", "isInternetConnection NULL :S");
+			return false;
+		}
+			
+		if (!i.isConnected())
+		{
+			Log.v("InternetConnection", "isInternetConnection is not connected");
+			return false;
+		}
+			
+		if (!i.isAvailable())
+		{
+			Log.v("InternetConnection", "isInternetConnection is not available");
+			return false;
+		}
+		Log.v("InternetConnection", "isInternetConnection DONE!");
+
+		return true;   	
     }
+/*
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) 
+    {
+		this.facebookConnector.getFacebook().authorizeCallback(requestCode, resultCode, data);
+	}
+    
+    public void updateLoginStatus() {
+		loginStatus.setText("Logged into Twitter : " + facebookConnector.getFacebook().isSessionValid());
+	}
+	
+
+	private static String getFacebookMsg() 
+	{
+		return MSG + " at " + new Date().toLocaleString();
+	}	
+	
+	static public void postMessage() 
+	{
+		Log.d("activity", "postMessage (FB) on Java");
+		if (facebookConnector.getFacebook().isSessionValid()) 
+		{
+			postMessageInThread();
+		} 
+		else 
+		{
+			SessionEvents.AuthListener listener = new SessionEvents.AuthListener() 
+			{
+				
+				public void onAuthSucceed() 
+				{
+					postMessageInThread();
+				}
+				
+				public void onAuthFail(String error) 
+				{
+					
+				}
+			};
+			SessionEvents.addAuthListener(listener);
+			facebookConnector.login();
+		}
+	}
+
+	private static void postMessageInThread() 
+	{
+		Thread t = new Thread() {
+			public void run() {
+		    	
+		    	try {
+		    		facebookConnector.postMessageOnWall(getFacebookMsg());
+					mFacebookHandler.post(mUpdateFacebookNotification);
+				} catch (Exception ex) {
+					Log.e(TAG, "Error sending msg",ex);
+				}
+		    }
+		};
+		t.start();
+	}
+
+	private void clearCredentials() 
+	{
+		try 
+		{
+			facebookConnector.getFacebook().logout(getApplicationContext());
+		} 
+		catch (MalformedURLException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	*/
+	private static void sendATweet()
+	{
+		Log.d("activity", "Tweet on Java EDITABLE (Bad way, better use a library; Current version use web navigator)");
+		String score = "123";
+		String tweetUrl = "https://twitter.com/intent/tweet?text=Hello ! I have just got " + score + " points in mygame for Android !!!!";
+		Uri uri = Uri.parse(tweetUrl);
+		Intent i = new Intent(Intent.ACTION_VIEW, uri);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        myAndroidContext.startActivity(i);
+	}
+	private static void sendEMail()
+	{
+		Log.d("activity", "Send a email on Java");
+		Intent i = new Intent(Intent.ACTION_SEND);
+		//i.setType("text/plain"); //use this line for testing in the emulator
+		i.setType("message/rfc822") ; // use from live device
+		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		i.putExtra(Intent.EXTRA_EMAIL, new String[]{"mrpiperoman@hotmail.com"/*"test@gmail.com"*/});
+		i.putExtra(Intent.EXTRA_SUBJECT,"Subject goes here");
+		i.putExtra(Intent.EXTRA_TEXT,"Test body goes here");
+		myAndroidContext.startActivity(i);
+	}
 	//////////////////////////////////////////////////////////////
 	// 					OpenGL   								//
 	//////////////////////////////////////////////////////////////
